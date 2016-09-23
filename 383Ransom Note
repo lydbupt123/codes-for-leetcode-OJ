@@ -1,0 +1,27 @@
+public class Solution {
+    public boolean canConstruct(String ransomNote, String magazine) {
+        int[] rstr=new int[26];
+        int[] mstr=new int[26];
+        for(int j=0;j<26;j++){
+            rstr[j]=0;
+            mstr[j]=0;
+        }
+        
+        char[] chararrran;
+        chararrran=ransomNote.toCharArray();
+        char[] chararrmag;
+        chararrmag=magazine.toCharArray();
+        
+        for(char r:chararrran){
+            rstr[r-'a']++;
+        }
+        for(char m:chararrmag){
+            mstr[m-'a']++;
+        }
+        for(int i=0;i<26;i++){
+            if((rstr[i]-mstr[i])>0)
+                return false;
+        }
+        return true;
+    }
+}
