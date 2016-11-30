@@ -1,0 +1,29 @@
+//this code i found from the discuss which leetcode.No is 100 named the same tree,the main idea is the traversal of tree. This is the Morris Traversal used to solve
+//this problem.
+int m(TreeNode *&h) {//h 是一个对TreeNode指针的引用，方便在主循环中来修改当前节点的位置。
+        int v = 0;
+        if (h) {
+            v = h->val;
+            if (TreeNode *p = h->left) {
+                while (p->right && p->right != h) p = p->right;
+                if (p->right) {
+                    h = h->right;
+                    p->right = NULL;
+                } else {
+                    p->right = h;
+                    h = h->left;
+                }
+            } else {
+                h = h->right;
+            }
+        }
+        return v;
+        }..莫里斯算法中序遍历实现
+bool isSameTree(TreeNode* p, TreeNode* q) {
+        bool o = true;
+        while (p || q) {
+            if (!(p&&q)) o = false;
+            if (m(p) != m(q)) o = false;
+        }
+        return o;
+    }
